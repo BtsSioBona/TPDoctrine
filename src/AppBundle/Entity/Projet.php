@@ -1,0 +1,66 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Projet
+ *
+ * @ORM\Table(name="projet")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjetRepository")
+ */
+class Projet
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomProjet", type="string", length=50)
+     */
+    private $nomProjet;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nomProjet
+     *
+     * @param string $nomProjet
+     *
+     * @return Projet
+     */
+    public function setNomProjet($nomProjet)
+    {
+        $this->nomProjet = $nomProjet;
+
+        return $this;
+    }
+
+    /**
+     * Get nomProjet
+     *
+     * @return string
+     */
+    public function getNomProjet()
+    {
+        return $this->nomProjet;
+    }
+}
+
