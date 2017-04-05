@@ -127,4 +127,16 @@ class AppliController extends Controller
          return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
      }
 
+    /**
+     * @Route("/voircours/{coursId}", name="voircours")
+     */
+    public function voirCoursAction($coursId)
+    {
+        $product = $this->getDoctrine()
+            ->getRepository('AppBundle:Cours')
+            ->find($coursId);
+
+        return $this->render('ok.html.twig',array('lesCours' => $product));
+    }
+
 }
