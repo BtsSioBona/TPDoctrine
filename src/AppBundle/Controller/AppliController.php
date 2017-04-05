@@ -97,4 +97,34 @@ class AppliController extends Controller
         return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
     }
 
+
+    /**
+     * @Route("/creercourstheme", name="creercourstheme")
+     */
+     public function creerCoursThemeAction(Request $request){
+         $cours = new Cours();
+         $form = $this->createFormBuilder($cours)
+             ->add('libellecours', TextType::class, array('label' => 'Libéllé du cours :'))
+             ->add('nbjours', IntegerType::class, array('label' => 'Nb jours : :'))
+             ->add('lesThemes', EntityType::class, array('class' => 'AppBundle:Theme',
+                 'label' => 'libelle',
+                 'choice_label' => 'libelle',
+                 'required' => true,
+                 'multiple' => true,
+                 'expanded' => true,
+             ))
+             ->add('Enrengistrer', SubmitType::class)
+             ->getForm();
+
+         $form->handleRequest($request);
+         if ($form->isSubmitted() && $form->isValid()) {
+             //$task = $form->getData(); Transitivité made by Rémy
+             $em = $this->getDoctrine()->getManager();
+             $em->persist($cours);
+             $em->flush();
+             return $this->render('ok.html.twig', array('message' => 'Cours Créé'));
+         }
+         return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
+     }
+
 }
