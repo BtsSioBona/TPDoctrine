@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Seminaire;
 
 
 class AppliController extends Controller
@@ -45,9 +46,9 @@ class AppliController extends Controller
         }
         return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
     }
+
     /**
-     * @Route("/creerSeminaire", name"creerSeminaire")
-     *
+     * @Route("/creerseminaire", name="creerSeminaire")
      */
     public function creerSeminaireAction(Request $request){
         $seminaire = new Seminaire();
@@ -71,10 +72,6 @@ class AppliController extends Controller
             return $this->render('ok.html.twig', array('message' => 'Cours Créé'));
         }
         return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
-
-
-
-
     }
 
 
