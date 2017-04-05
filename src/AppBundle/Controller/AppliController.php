@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Cours;
+use AppBundle\Entity\Theme;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -74,5 +75,26 @@ class AppliController extends Controller
         return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
     }
 
+    /**
+     * @Route("/creertheme", name="creertheme")
+     */
+    public function creerThemeAction(Request $request){
+
+        $theme = new Theme();
+        $form = $this->createFormBuilder($theme)
+            ->add('libelle', TextType::class, array('label' => 'Libelle du Thème : '))
+            ->add('Enrengistrer', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //$task = $form->getData(); Transitivité made by Rémy
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($theme);
+            $em->flush();
+            return $this->render('ok.html.twig', array('message' => 'Thème Créé'));
+        }
+        return $this->render('cours.html.twig', array('leFormulaire' => $form->createView()));
+    }
 
 }
