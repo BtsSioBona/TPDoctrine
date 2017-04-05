@@ -33,6 +33,12 @@ class Seminaire
      */
     private $employes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Cours")
+     * @ORM\JoinColumn(name="idCours", referencedColumnName="id")
+     */
+    private $cours;
+
 
     /**
      * Get id
@@ -107,5 +113,29 @@ class Seminaire
     public function getEmployes()
     {
         return $this->employes;
+    }
+
+    /**
+     * Set cours
+     *
+     * @param \AppBundle\Entity\Cours $cours
+     *
+     * @return Seminaire
+     */
+    public function setCours(\AppBundle\Entity\Cours $cours = null)
+    {
+        $this->cours = $cours;
+
+        return $this;
+    }
+
+    /**
+     * Get cours
+     *
+     * @return \AppBundle\Entity\Cours
+     */
+    public function getCours()
+    {
+        return $this->cours;
     }
 }
